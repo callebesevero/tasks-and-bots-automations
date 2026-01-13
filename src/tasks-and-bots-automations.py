@@ -6,7 +6,7 @@ site = 'https://dlp.hashtagtreinamentos.com/python/intensivao/login'
 email = 'jou@gmail.com'
 senha = 'senha'
 
-PAUSE = 1.2
+PAUSE = 0.3
 
 # Abrir site
 press('win')
@@ -34,11 +34,10 @@ press('tab')
 write(senha)
 press('enter')
 
+sleep(1)
 
 # Pegar dados do .csv
 table = read_csv('src/produtos.csv')
-
-sleep(2)
 
 # Inserir dados
 for line in table.index:
@@ -71,7 +70,6 @@ for line in table.index:
     obs = str(table.loc[line, 'obs'])
     if obs != 'nan':
         write(obs)
-
     press('enter')
 
     scroll(2000)
