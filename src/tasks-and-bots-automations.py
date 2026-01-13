@@ -1,55 +1,77 @@
-from pyautogui import hotkey, scroll, click, press, typewrite
+from pyautogui import hotkey, scroll, click, press, write, PAUSE
 from pandas import read_csv
+from time import sleep
 
+site = 'https://dlp.hashtagtreinamentos.com/python/intensivao/login'
 email = 'jou@gmail.com'
 senha = 'senha'
-site = 'https://dlp.hashtagtreinamentos.com/python/intensivao/login'
+
+PAUSE = 1.2
+
 # Abrir site
 press('win')
-typewrite('brave web browser')
+
+sleep(1)
+
+write('brave web browser')
+
+sleep(0.1)
+
 press('enter')
-typewrite(site)
+
+sleep(2)
+
+hotkey('ctrl', 'l')
+write(site)
+press('enter')
+
+sleep(1)
 
 # Login
-typewrite(email)
 press('tab')
-typewrite(senha)
+write(email)
+press('tab')
+write(senha)
 press('enter')
 
 
 # Pegar dados do .csv
 table = read_csv('src/produtos.csv')
 
+sleep(2)
+
 # Inserir dados
 for line in table.index:
-    click(x=630, y=450)
+    click(x=521, y=245)
 
-    code = table.loc[line, 'código']
-    typewrite(code)
+    code = str(table.loc[line, 'codigo'])
+    write(code)
     press('tab')
 
-    brand = table.loc[line, 'marca']
-    typewrite(brand)
+    brand = str(table.loc[line, 'marca'])
+    write(brand)
     press('tab')
 
-    ptype = table.loc[line, 'tipo']
-    typewrite(ptype)
+    ptype = str(table.loc[line, 'tipo'])
+    write(ptype)
     press('tab')
 
-    category = table.loc[line, 'categoria']
-    typewrite(category)
+    category = str(table.loc[line, 'categoria'])
+    write(category)
     press('tab')
 
-    price = table.loc[line, 'preço']
-    typewrite(price)
+    price = str(table.loc[line, 'preco_unitario'])
+    write(price)
     press('tab')
 
-    cost = table.loc[line, 'custo']
-    typewrite(cost)
+    cost = str(table.loc[line, 'custo'])
+    write(cost)
     press('tab')
 
-    obs = table.loc[line, 'obs']
-    typewrite(obs)
+    obs = str(table.loc[line, 'obs'])
+    if obs != 'nan':
+        write(obs)
+
     press('enter')
 
-    scroll(5000)
+    scroll(2000)
